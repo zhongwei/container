@@ -2,17 +2,19 @@ FROM ubuntu
 
 #Install basic tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates \
-    wget \
-    curl \
-    git \
-    zsh \
-    emacs \
-    vim \
-    && rm -rf /var/lib/apt/lists/*
+      ca-certificates \
+      wget \
+      curl \
+      git \
+      zsh \
+      emacs \
+      vim \
+      && rm -rf /var/lib/apt/lists/*
 
 #Install Oh My Zsh
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
+      && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
+      && chsh -s /bin/zsh
 
 #Install spacemacs
 RUN git clone https://github.com/syl20bnr/spacemacs /root/.emacs.d
