@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && rm -rf /var/lib/apt/lists/*
 
 #Install Oh My Zsh
+ENV SHELL=/bin/zsh
 RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
       && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
       && chsh -s /bin/zsh
