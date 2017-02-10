@@ -11,8 +11,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       vim \
       && rm -rf /var/lib/apt/lists/*
 
+ENV LC_ALL C.UTF-8
+ENV TERM xterm-256color
+
 #Install Oh My Zsh
-ENV SHELL=/bin/zsh
+ENV SHELL /bin/zsh
 RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
       && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
       && chsh -s /bin/zsh
