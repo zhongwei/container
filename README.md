@@ -1,2 +1,2 @@
-# container
-My docker container for development.
+# Dimage
+My docker image for development.
