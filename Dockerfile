@@ -1,9 +1,11 @@
 FROM ubuntu
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 #Update apt source and install basic tools
-RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list \
       && apt clean \
-      && apt update && apt install -y --no-install-recommends \
+      && apt update && apt install -fy --no-install-recommends \
             ca-certificates \
             wget \
             curl \
