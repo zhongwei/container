@@ -44,7 +44,7 @@ Run apt install golang-1.14-go
 Run curl https://sh.rustup.rs -sSf | sh
 
 #Install Nodejs
-Run curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+Run curl -sL https://deb.nodesource.com/setup_12.16.3 | bash - \
     && apt install -y nodejs
 
 #Install spacemacs
