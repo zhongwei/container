@@ -17,6 +17,7 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list \
              zsh \
              emacs \
              vim \
+             neovim \
              bat \
              sl \
              nnn \
@@ -58,11 +59,17 @@ Run curl https://sh.rustup.rs -sSf | sh -s -- -y \
 Run curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && apt install -y nodejs
 
-#Clean apt lists
-Run rm -rf /var/lib/apt/lists/*
+#Install Spacevim
+Run curl -sLf https://spacevim.org/install.sh | bash \
+#      && vim +'call dein#install()' +qall \
+      && nvim --headless +'call dein#install()' +qall
 
-#Install spacemacs
+
+#Install Spacemacs
 RUN git clone https://github.com/syl20bnr/spacemacs /root/.emacs.d
 COPY emacs-pkg-install.el /root/.emacs.d/emacs-pkg-install.el
 COPY .spacemacs /root/.spacemacs
 RUN emacs -nw -batch -u root -q -kill
+
+#Clean apt lists
+Run rm -rf /var/lib/apt/lists/*
