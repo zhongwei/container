@@ -44,7 +44,7 @@ Run apt install -y golang-1.14-go
 Run curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 #Install Nodejs
-Run curl -sL https://deb.nodesource.com/setup_12.16.3 | bash - \
+Run curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && apt install -y nodejs
 
 #Clean apt lists
