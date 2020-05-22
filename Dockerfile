@@ -1,5 +1,7 @@
 FROM ubuntu
 
+LABEL maintainer="zhongwei99@163.com"
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 #Update apt source and install basic tools
@@ -32,7 +34,7 @@ RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
       && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
       && sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"powerlevel9k/powerlevel9k\"@ ~/.zshrc \
       && sed -i 's@plugins=(git)@plugins=(git zsh-syntax-highlighting zsh-autosuggestions)@' ~/.zshrc \
-      && chsh -s /bin/zsh
+      && chsh -s /usr/bin/zsh
 
 #Install build-essential
 RUN apt install -y build-essential 
