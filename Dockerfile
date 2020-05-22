@@ -35,13 +35,13 @@ RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
       && chsh -s /bin/zsh
 
 #Install build-essential
-RUN apt install build-essential 
+RUN apt install -y build-essential 
 
 #Install Go
-Run apt install golang-1.14-go
+Run apt install -y golang-1.14-go
 
 #Install Rust
-Run curl https://sh.rustup.rs -sSf | sh
+Run curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 #Install Nodejs
 Run curl -sL https://deb.nodesource.com/setup_12.16.3 | bash - \
