@@ -21,6 +21,7 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list \
              sl \
              nnn \
              mc \
+             nasm \
              fonts-powerline 
 
 ENV LC_ALL C.UTF-8
@@ -50,7 +51,7 @@ Run apt install -y golang-1.14-go \
 Run curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && sed -i '$aexport RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static' ~/.zshrc \
     && sed -i '$aexport RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup' ~/.zshrc \
-    && sed -i '$aexport PATH="$PATH:$HOME/.cargo/bin"' ~/.zshrc 
+    && sed -i '$aexport PATH="$PATH:$HOME/.cargo/bin"' ~/.zshrc \
     && sed -i 's@export PATH=@export PATH=$HOME/.cargo/bin:/usr/lib/cargo/bin:@' ~/.zshrc 
 
 #Install Nodejs
