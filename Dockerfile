@@ -13,7 +13,6 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list \
             zsh \
             emacs \
             vim \
-            build-essential \
 	    bat \
             sl \
 	    nnn \
@@ -34,6 +33,19 @@ RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
       && sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"powerlevel9k/powerlevel9k\"@ ~/.zshrc \
       && sed -i 's@plugins=(git)@plugins=(git zsh-syntax-highlighting zsh-autosuggestions)@' ~/.zshrc \
       && chsh -s /bin/zsh
+
+#Install build-essential
+RUN build-essential 
+
+#Install Go
+Run apt install golang-1.14-go
+
+#Install Rust
+Run curl https://sh.rustup.rs -sSf | sh
+
+#Install Nodejs
+Run curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+    && apt install -y nodejs
 
 #Install spacemacs
 RUN git clone https://github.com/syl20bnr/spacemacs /root/.emacs.d
