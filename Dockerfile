@@ -23,7 +23,8 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list \
              nnn \
              mc \
              nasm \
-             fonts-powerline 
+             fonts-powerline \
+      && rm -rf /var/lib/apt/lists/*
 
 ENV LC_ALL C.UTF-8
 ENV TERM xterm-256color
@@ -71,5 +72,8 @@ COPY emacs-pkg-install.el /root/.emacs.d/emacs-pkg-install.el
 COPY .spacemacs /root/.spacemacs
 RUN emacs -nw -batch -u root -q -kill
 
-#Clean apt lists
-Run rm -rf /var/lib/apt/lists/*
+#Mofidy TimeZone
+ENV TZ=Asia/Shanghai
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+      && dpkg-reconfigure --frontend noninteractive tzdata
