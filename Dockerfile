@@ -10,6 +10,7 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list \
       && apt update \
       && apt install -fy --no-install-recommends \
              ca-certificates \
+             htop \
              wget \
              curl \
              git \
@@ -34,16 +35,23 @@ RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
       && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
       && sed -i s@ZSH_THEME=\"robbyrussell\"@ZSH_THEME=\"powerlevel9k/powerlevel9k\"@ ~/.zshrc \
       && sed -i 's@plugins=(git)@plugins=(git zsh-syntax-highlighting zsh-autosuggestions)@' ~/.zshrc \
+      && sed -i 's@# export PATH=@export PATH=/usr/games:@' ~/.zshrc \
       && chsh -s /usr/bin/zsh
 
 #Install build-essential
 RUN apt install -y build-essential 
 
 #Install Go
-Run apt install -y golang-1.14-go
+Run apt install -y golang-1.14-go \
+    && ln -s /usr/lib/go-1.14/bin/go /usr/local/bin/go \
+    && sed -i '$aexport GOPROXY="https://goproxy.cn/"' ~/.zshrc
 
 #Install Rust
-Run curl https://sh.rustup.rs -sSf | sh -s -- -y
+Run curl https://sh.rustup.rs -sSf | sh -s -- -y \
+    && sed -i '$aexport RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static' ~/.zshrc \
+    && sed -i '$aexport RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup' ~/.zshrc \
+    && sed -i '$aexport PATH="$PATH:$HOME/.cargo/bin"' ~/.zshrc 
+    && sed -i 's@export PATH=@export PATH=$HOME/.cargo/bin:/usr/lib/cargo/bin:@' ~/.zshrc 
 
 #Install Nodejs
 Run curl -sL https://deb.nodesource.com/setup_12.x | bash - \
