@@ -28,6 +28,12 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.163.com/@g /etc/apt/sources.list \
 ENV LC_ALL C.UTF-8
 ENV TERM xterm-256color
 
+#Mofidy TimeZone
+ENV TZ=Asia/Shanghai
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+      && dpkg-reconfigure --frontend noninteractive tzdata
+
 #Install Oh My Zsh
 ENV SHELL /bin/zsh
 RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
@@ -70,12 +76,6 @@ RUN git clone https://github.com/syl20bnr/spacemacs /root/.emacs.d
 COPY emacs-pkg-install.el /root/.emacs.d/emacs-pkg-install.el
 COPY .spacemacs /root/.spacemacs
 RUN emacs -nw -batch -u root -q -kill
-
-#Mofidy TimeZone
-ENV TZ=Asia/Shanghai
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-      && dpkg-reconfigure --frontend noninteractive tzdata
 
 ##Clean
 RUN rm -rf /var/lib/apt/lists/*
